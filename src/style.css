@@ -1,0 +1,61 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+}
+
+#app {
+    padding-bottom: 60px; /* Space for bottom nav */
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    background-color: #f0f0f0;
+    border-top: 1px solid #ccc;
+}
+
+.bottom-nav a {
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.bottom-nav a.active {
+    font-weight: bold;
+    color: #007bff;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.filters {
+    padding: 10px;
+}
+
+.share-button {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li a {
+    display: block;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    text-decoration: none;
+    color: #333;
+}
