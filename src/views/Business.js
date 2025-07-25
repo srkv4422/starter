@@ -2,22 +2,29 @@ import { ShareButton } from '../components/ShareButton.js';
 import { parseQuery, updateURL } from '../utils.js';
 
 export const renderBusiness = (container, query) => {
+    const q = parseQuery(query);
     container.innerHTML = `
         <header>
             <h1>Business</h1>
             ${ShareButton().outerHTML}
         </header>
         <div class="filters">
-            <input type="text" id="category" placeholder="Category" value="${parseQuery(query).category || ''}">
-            <input type="text" id="location" placeholder="Location" value="${parseQuery(query).location || ''}">
+            <input type="text" id="category" placeholder="e.g., restaurants" value="${q.category || ''}">
+            <input type="text" id="location" placeholder="e.g., manchester" value="${q.location || ''}">
             <select id="sort">
-                <option value="rating" ${parseQuery(query).sort === 'rating' ? 'selected' : ''}>Rating</option>
-                <option value="name" ${parseQuery(query).sort === 'name' ? 'selected' : ''}>Name</option>
+                <option value="rating" ${q.sort === 'rating' ? 'selected' : ''}>Sort by Rating</option>
+                <option value="name" ${q.sort === 'name' ? 'selected' : ''}>Sort by Name</option>
             </select>
         </div>
-        <ul>
-            <li><a href="/business/details/123" onclick="event.preventDefault(); window.history.pushState({}, '', '/business/details/123'); window.dispatchEvent(new Event('popstate'));">Business 1</a></li>
-            <li><a href="/business/details/456" onclick="event.preventDefault(); window.history.pushState({}, '', '/business/details/456'); window.dispatchEvent(new Event('popstate'));">Business 2</a></li>
+        <ul class="item-list">
+            <li><a href="/business/details/123" onclick="event.preventDefault(); window.history.pushState({}, '', '/business/details/123'); window.dispatchEvent(new Event('popstate'));">
+                <strong>Business One</strong>
+                <span>Category: Restaurant, Location: Manchester</span>
+            </a></li>
+            <li><a href="/business/details/456" onclick="event.preventDefault(); window.history.pushState({}, '', '/business/details/456'); window.dispatchEvent(new Event('popstate'));">
+                <strong>Business Two</strong>
+                <span>Category: Cafe, Location: London</span>
+            </a></li>
         </ul>
     `;
 
@@ -30,16 +37,18 @@ export const renderBusiness = (container, query) => {
             sort: document.getElementById('sort').value,
         };
         updateURL('/business', newQuery);
-        renderBusiness(container, new URLSearchParams(newQuery).toString());
     };
 };
 
 export const renderBusinessDetails = (container, id) => {
     container.innerHTML = `
         <header>
-            <h1>Business Details ${id}</h1>
+            <h1>Business Details</h1>
             ${ShareButton().outerHTML}
         </header>
-        <p>Details about business ${id}.</p>
+        <div class="details-content">
+            <h2>Business ${id}</h2>
+            <p>Here are the full details for the business, including reviews and other information.</p>
+        </div>
     `;
 };

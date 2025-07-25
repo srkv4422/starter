@@ -1,11 +1,11 @@
 export const BottomNav = () => {
     const navItems = [
-        { name: 'Business', path: '/business' },
-        { name: 'Jobs', path: '/jobs' },
-        { name: 'Deals', path: '/deals' },
-        { name: 'News', path: '/news' },
-        { name: 'Sell', path: '/sell' },
-        { name: 'Posts', path: '/posts' },
+        { name: 'Business', path: '/business', icon: 'briefcase' },
+        { name: 'Jobs', path: '/jobs', icon: 'search' },
+        { name: 'Deals', path: '/deals', icon: 'tag' },
+        { name: 'News', path: '/news', icon: 'file-alt' },
+        { name: 'Sell', path: '/sell', icon: 'store' },
+        { name: 'Posts', path: '/posts', icon: 'comment' },
     ];
 
     const nav = document.createElement('nav');
@@ -14,8 +14,11 @@ export const BottomNav = () => {
     navItems.forEach(item => {
         const a = document.createElement('a');
         a.href = item.path;
-        a.textContent = item.name;
         a.className = window.location.pathname.startsWith(item.path) ? 'active' : '';
+        a.innerHTML = `
+            <i class="fas fa-${item.icon}"></i>
+            <span>${item.name}</span>
+        `;
         a.onclick = (e) => {
             e.preventDefault();
             window.history.pushState({}, '', item.path);
